@@ -16,5 +16,4 @@ const CourseGoalList=props=>{
         </ul>
     );
 }
-
 export default CourseGoalList;
