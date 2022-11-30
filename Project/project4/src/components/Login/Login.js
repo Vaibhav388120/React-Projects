@@ -56,7 +56,7 @@ const Login=(props)=>{
     useEffect(()=>{
         const identifier=setTimeout(()=>{
             setFormIsValid(emailState.isValid && passwordState.isValid);
-        },5000);
+        },500);
         return()=>{
             clearTimeout(identifier);
         };
