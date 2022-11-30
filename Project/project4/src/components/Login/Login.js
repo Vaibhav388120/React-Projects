@@ -56,10 +56,10 @@ const Login=(props)=>{
     useEffect(()=>{
         const identifier=setTimeout(()=>{
             setFormIsValid(emailState.isValid && passwordState.isValid);
-        },500);
+        },5000);
         return()=>{
             clearTimeout(identifier);
-        }
+        };
     },[emailState.isValid,passwordState.isValid]);
 
     const emailChangeHandler=(event)=>{
@@ -97,7 +97,7 @@ const Login=(props)=>{
                 id="email"
                 label="E-Mail"
                 type="email"
-                // isValid={emailIsValid}
+                isValid={emailState.isValid}
                 value={emailState.value}
                 onChange={emailChangeHandler}
                 onBlur={validateEmailHandler}
@@ -107,7 +107,7 @@ const Login=(props)=>{
                 id="password"
                 label="Password"
                 type="password"
-                // isValid={passwordIsValid}
+                isValid={passwordState.isValid}
                 value={passwordState.value}
                 onChange={passwordChangeHandler}
                 onBlur={validatePasswordHandler}
