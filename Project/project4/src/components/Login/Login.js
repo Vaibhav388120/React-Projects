@@ -50,17 +50,18 @@ const Login=(props)=>{
         }
     },[]);
 
-    // const {isValid:emailIsValid}=emailState;
-    // const {isValid:passwordIsValid}=passwordState;
+    const {isValid:emailIsValid}=emailState;
+    const {isValid:passwordIsValid}=passwordState;
 
     useEffect(()=>{
         const identifier=setTimeout(()=>{
-            setFormIsValid(emailState.isValid && passwordState.isValid);
+            setFormIsValid(emailIsValid && passwordIsValid);
         },500);
+
         return()=>{
             clearTimeout(identifier);
         };
-    },[emailState.isValid,passwordState.isValid]);
+    },[emailIsValid,passwordIsValid]);
 
     const emailChangeHandler=(event)=>{
         dispatchEmail({type:'USER_INPUT', val:event.target.value});
@@ -81,7 +82,7 @@ const Login=(props)=>{
         if(formIsValid){
             authCtx.onLogin(emailState.value,passwordState.value);
         }
-        else if(!emailState.isValid){
+        else if(!emailIsValid){
             emailInputRef.current.focus();
         }
         else{
@@ -92,12 +93,12 @@ const Login=(props)=>{
     return(
         <Card className={classes.login}>
             <form onSubmit={submitHandler}>
-                <Input 
+            <Input 
                 ref={emailInputRef}
                 id="email"
                 label="E-Mail"
                 type="email"
-                isValid={emailState.isValid}
+                isValid={emailIsValid}
                 value={emailState.value}
                 onChange={emailChangeHandler}
                 onBlur={validateEmailHandler}
@@ -107,11 +108,12 @@ const Login=(props)=>{
                 id="password"
                 label="Password"
                 type="password"
-                isValid={passwordState.isValid}
+                isValid={passwordIsValid}
                 value={passwordState.value}
                 onChange={passwordChangeHandler}
                 onBlur={validatePasswordHandler}
                 />
+            
                 <div className={classes.actions}>
                     <Button type="submit" className={classes.btn}>
                         Login
